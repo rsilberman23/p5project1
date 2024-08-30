@@ -1,8 +1,10 @@
 let sun = 320
 let dragon
+let fire
 
 function preload(){
 dragon = loadImage('dragon.png')
+fire = loadImage('fire.png')
 }
 
 function setup() {
@@ -73,18 +75,10 @@ function draw() {
     rect(100, 450, 450, 500)
     noStroke();
   }
-// mouse is pressed
-//  if(keyIsPressed == true){
-//    x = 100
-//    fill(255, 25, 52);
-//    rect(100, 450, 450, 500);
-//    noStroke();
-//  } else {
-//    fill(15, 51, 255);
-//    rect(100, 450, 450, 500);
-//    noStroke();
-//      x = 600
-//  }
+
+  if (keyIsPressed == true){
+      image(fire, 490, 380)
+  }
 
 
 }
