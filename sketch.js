@@ -78,7 +78,12 @@ function draw() {
 
   if (keyIsPressed == true){
       image(fire, 490, 380)
+      // for loop destroying bridge after fire is activated
   }
+
+  
+
+
 
 
 }
