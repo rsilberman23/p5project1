@@ -2,7 +2,7 @@ let sun = 320
 let dragon
 let fire
 let nightTime = false
-let dayTime = false
+let dayTime = true
 
 function preload(){
 dragon = loadImage('dragon.png')
