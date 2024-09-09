@@ -1,6 +1,8 @@
 let sun = 320
 let dragon
 let fire
+let nightTime = false
+let dayTime = false
 
 function preload(){
 dragon = loadImage('dragon.png')
@@ -12,10 +14,35 @@ function setup() {
   imageMode(CENTER)
 }
 
+  //custom function activate night, changes background to night
+  function activateNight(){
+    background(191, 23, 17)
+}
+  function activateDay(){
+    background(158, 223, 255);
+  }
+
+    //if n is pressed, nightTime will be true
+  function keyPressed(){
+  if(key === 'n'){
+    nightTime = true;
+    dayTime = false;
+  }
+
+  if(key === 'd'){
+    dayTime = true;
+    nightTime = false;
+  }
+}
+
 function draw() {
 
-  //blue background
-  background(158, 223, 255);
+  if (nightTime){
+    activateNight();
+  } else if (dayTime){
+    activateDay();
+  }
+
 
   //dragon image
   image(dragon, 800, 200)
@@ -80,10 +107,12 @@ function draw() {
       image(fire, 490, 380)
       // for loop destroying bridge after fire is activated
   }
-
-  
-
-
-
-
 }
+
+
+
+
+
+
+
+
