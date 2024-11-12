@@ -123,7 +123,7 @@ class movieData{
       //update the variables to reflect the data tied to the button that was clicked
     image(startScreen,  windowWidth/2, windowHeight/2, 1100, 700)
     
-    fill(100, 0, 67);
+    fill(0, 0, 0);
     noStroke();
     textSize(21);
     textAlign(LEFT);
