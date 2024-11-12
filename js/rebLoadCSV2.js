@@ -132,17 +132,17 @@ class movieData{
     text('Title: ' + this.title, windowWidth/2 -484, windowHeight/2 - 50 );
     text('Director: ' + this.director, windowWidth/2 -484, windowHeight/2 - 20)
     text('Date: ' + this.date, windowWidth/2 -484, windowHeight/2 + 10);
-    text('Genre 1: ' + this.genre1, windowWidth/2, 200);
-    text('Genre 2: ' + this.genre2, windowWidth/2, 250);
-    text('Genre 3: ' + this.genre3, windowWidth/2, 300);
+    //text('Genre 1: ' + this.genre1, windowWidth/2, 200);
+    //text('Genre 2: ' + this.genre2, windowWidth/2, 250);
+    //text('Genre 3: ' + this.genre3, windowWidth/2, 300);
     text('Rotten Tomatoes: ' + this.tomatoes, windowWidth/2 -484, windowHeight/2 + 40);
-    text('Cast Member 1: ' + this.castMember1, windowWidth/2, 400);
-    text('Cast Member 2: ' + this.castMember2, windowWidth/2, 450);
-    text('Cast Member 3: ' + this.castMember3, windowWidth/2, 500);
-    text('Streaming Service 1: ' + this.streamingService1, windowWidth/2, 550);
-    text('Streaming Service 2: ' + this.streamingService2, windowWidth/2, 600);
-    text('Franchise? ' + this.franchise, windowWidth/2, 650);
-    text('Suggested Movie: ' + this.suggestedMovie, windowWidth/2, 700);
+    //text('Cast Member 1: ' + this.castMember1, windowWidth/2, 400);
+    //text('Cast Member 2: ' + this.castMember2, windowWidth/2, 450);
+    //text('Cast Member 3: ' + this.castMember3, windowWidth/2, 500);
+    //text('Streaming Service 1: ' + this.streamingService1, windowWidth/2, 550);
+    //text('Streaming Service 2: ' + this.streamingService2, windowWidth/2, 600);
+    //text('Franchise? ' + this.franchise, windowWidth/2, 650);
+    //text('Suggested Movie: ' + this.suggestedMovie, windowWidth/2, 700);
     image(this.moviePoster, windowWidth/2, windowHeight/2, 200, 300)
     // }else if (!this.checkbox.checked()){
     //  // image(startScreen, 0, 0, windowWidth, windowHeight)
