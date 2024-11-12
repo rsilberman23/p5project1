@@ -114,7 +114,7 @@ class movieData{
     if(choiceCounter <= 5){
 
     userGenreArray.push(this.genre1)
-    userGenre2Array.push(this.genre2)
+    //userGenre2Array.push(this.genre2)
 
     print(userGenreArray)
     // if (this.checkbox.checked()) {
