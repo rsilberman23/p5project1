@@ -5,17 +5,20 @@ let movieMenu
 
 let imageArray = []
 let movieDataArray = [];
-let showTitleScreen = true
-let startScreen;
+let secondScreen;
+let firstScreen = true;
+let thirdScreen;
 
 let choiceCounter = 0
 let userGenreArray = []
+let userGenre2Array = []
+let suggestedMovieArray = []
 
 function preload() {
  table = loadTable('js/DataWithImages.csv', 'csv', 'header', loadImageArray)
- startScreen = loadImage('images/curateFilmScreen.png')
-
-
+ secondScreen = loadImage('images/secondScreen.png')
+ firstScreen = loadImage('images/firstScreen.png')
+ thirdScreen = loadImage('images/thirdScreen.png')
 }
 
 function loadImageArray(){
@@ -57,9 +60,11 @@ function setup() {
     movieDataArray[i].show();
   }
 
-  // for (let i = 0; i < movieDataArray.length; i++){
-  //   movieDataArray[i].update();
-  //   }
+  toThirdScreenButton = createButton("I'm done choosing my favorite films")
+  toThirdScreenButton.position(windowWidth/2 + 565, windowHeight/2 +109)
+  toThirdScreenButton.mousePressed(thirdScreen)
+  toThirdScreenButton.hide()
+
 }
 
 
@@ -82,21 +87,12 @@ class movieData{
     this.suggestedMovie = suggestedMovie;
     this.moviePoster = moviePoster
 
-    //   //create a button for each entry
-    // this.checkbox = createCheckbox(this.title)
-
-    // //position each button 50 pixels below the previous
-    // for(let i = -1; i < movieDataArray.length; i++){
-    //   this.checkbox.position(50, i*55+100);
-    // }
-    // this.checkbox.style('z-index', '1');
-
      //create a button for each entry
     this.button = createButton(this.title)
 
     //position each button 50 pixels below the previous
     for(let i = -1; i < movieDataArray.length; i++){
-      this.button.position(50, i*45+55);
+      this.button.position(230, i*25+330);
     }
     this.button.style('z-index', '1');
   }
@@ -114,27 +110,25 @@ class movieData{
     if(choiceCounter <= 5){
 
     userGenreArray.push(this.genre1)
+    userGenre2Array.push(this.genre2)
+    suggestedMovieArray.push(this.suggestedMovie)
 
-    print(userGenreArray)
-    // if (this.checkbox.checked()) {
-    print("clicked")
-      // showTitleScreen = false
-      background(255, 124, 117);
+    background(255, 124, 117);
       //update the variables to reflect the data tied to the button that was clicked
-    image(startScreen,  windowWidth/2, windowHeight/2, 1100, 700)
+    image(secondScreen,  windowWidth/2, windowHeight/2, 1100, 700)
     
     fill(0, 0, 0);
     noStroke();
     textSize(21);
     textAlign(LEFT);
 
-    text('Title: ' + this.title, windowWidth/2 -484, windowHeight/2 - 50 );
-    text('Director: ' + this.director, windowWidth/2 -484, windowHeight/2 - 20)
-    text('Date: ' + this.date, windowWidth/2 -484, windowHeight/2 + 10);
+    text('Title: ' + this.title, windowWidth/2 -141, windowHeight/2 +180 );
+    text('Director: ' + this.director, windowWidth/2 -141, windowHeight/2 +210)
+    text('Date: ' + this.date, windowWidth/2 -141, windowHeight/2 + 240);
     //text('Genre 1: ' + this.genre1, windowWidth/2, 200);
     //text('Genre 2: ' + this.genre2, windowWidth/2, 250);
     //text('Genre 3: ' + this.genre3, windowWidth/2, 300);
-    text('Rotten Tomatoes: ' + this.tomatoes, windowWidth/2 -484, windowHeight/2 + 40);
+    text('Rotten Tomatoes: ' + this.tomatoes, windowWidth/2 -141, windowHeight/2 + 270);
     //text('Cast Member 1: ' + this.castMember1, windowWidth/2, 400);
     //text('Cast Member 2: ' + this.castMember2, windowWidth/2, 450);
     //text('Cast Member 3: ' + this.castMember3, windowWidth/2, 500);
@@ -144,16 +138,19 @@ class movieData{
     //text('Suggested Movie: ' + this.suggestedMovie, windowWidth/2, 700);
     image(this.moviePoster, windowWidth/2, windowHeight/2, 200, 300)
     // }else if (!this.checkbox.checked()){
-    //  // image(startScreen, 0, 0, windowWidth, windowHeight)
+    //  // image(secondScreen, 0, 0, windowWidth, windowHeight)
     // }
-     this.button.hide()
+    this.button.hide()
     for(let i = 0; i < userGenreArray.length; i++){
-      text(userGenreArray[i], windowWidth/2 +206, windowHeight/2 -140 + (i*25+55))
+      text(userGenreArray[i], windowWidth/2 +195, windowHeight/2 -140 + (i*25+55))
     }
-
-    } else{
-     //  this.button.hide()
+    for(let i = 0; i < userGenre2Array.length; i++){
+      text(userGenre2Array[i], windowWidth/2 +350, windowHeight/2 -140 + (i*25+55))
     }
+    for(let i = 0; i < suggestedMovieArray.length; i++){
+      text(suggestedMovieArray[i], windowWidth/2 +203, windowHeight/2 +135 + (i*25+55))
+    }
+    } 
   }
 }
 
@@ -161,10 +158,12 @@ class movieData{
 function draw(){
  
   print("X" + (windowWidth/2 - mouseX) * -1 , 30, 30)
-    print("y" + (windowHeight/2 - mouseY) *-1, 30, 60)
-  // if (showTitleScreen == true){
-  //   image(startScreen,  windowWidth/2, windowHeight/2, 1100, 700)
+  print("y" + (windowHeight/2 - mouseY) *-1, 30, 60)
+  // if (firstScreen == true){
+  //   image(firstScreen,  windowWidth/2, windowHeight/2, 1100, 700)
   // }else{
+  //   image(secondScreen,  windowWidth/2, windowHeight/2, 1100, 700)
+  // }
 
   // }
     // for (let i = 0; i < movieDataArray.length; i++){
@@ -175,12 +174,12 @@ function draw(){
 
 
 
-
-
-//title
-
-//Select 5 Films You Like from My Favorites
-//select box
-//add info from each film clicked into an array
-
-//film poster section
+//recommendation algorithms
+//change my screen to rectangles and shapes not images
+//need to integrate my firstScreen
+//create button on firstScreen to get to secondScreen
+//if counter >5, toThirdScreenButton appears
+//create toThirdScreenButton that gets you to thirdScreen
+//if genre comes up more than once, blurb will appear on thirdScreen
+//   about the type of person you are...
+//create button to get back to firstScreen
