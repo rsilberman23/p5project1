@@ -3,11 +3,13 @@ let submitButton
 let canvas
 let movieMenu
 
+let startButton
+
 let imageArray = []
 let movieDataArray = [];
-let secondScreen;
-let firstScreen = true;
-let thirdScreen;
+let secondScreenBool =false;
+let firstScreenBool = true;
+let thirdScreenBool =false;
 
 let choiceCounter = 0
 let userGenreArray = []
@@ -35,6 +37,10 @@ function setup() {
   background(255, 124, 117);
   fill(255)
 
+  startButton = createButton("Begin")
+  startButton.mousePressed(chooseMovies)
+  startButton.position(windowWidth/2, windowHeight/2 + 200)
+  startButton.style("z-index", "1")
   //button
   for (let i = 0; i < table.getRowCount(); i++){
     title = String(table.getString(i, 'Movie Title'));
@@ -56,14 +62,57 @@ function setup() {
   }
 
   //show each button for each data entry
+  // for (let i = 0; i < movieDataArray.length; i++){
+  //   movieDataArray[i].show();
+  // }
+
+}
+
+
+function introScreen(){
+
+image(firstScreen, windowWidth/2, windowHeight/2)
+}
+
+function chooseMovies(){
+  background(255, 124, 117);
+  firstScreenBool = false
+  secondScreenBool = true
+  startButton.hide()
+
   for (let i = 0; i < movieDataArray.length; i++){
     movieDataArray[i].show();
   }
+}
 
+function finalScreen(){
+  for (let i = 0; i < movieDataArray.length; i++){
+    movieDataArray[i].hideButtons();
+  }
+  image(thirdScreen, windowWidth/2, windowHeight/2)
   toThirdScreenButton = createButton("I'm done choosing my favorite films")
   toThirdScreenButton.position(windowWidth/2 + 565, windowHeight/2 +109)
   toThirdScreenButton.mousePressed(thirdScreen)
-  toThirdScreenButton.hide()
+  toThirdScreenButton.show()
+}
+
+
+function draw(){
+ 
+  print("X" + (windowWidth/2 - mouseX) * -1 , 30, 30)
+  print("y" + (windowHeight/2 - mouseY) *-1, 30, 60)
+
+  if(firstScreenBool == true){
+    introScreen()
+  }
+
+  if(secondScreenBool == true){
+   // chooseMovies()
+  }
+
+  if(thirdScreenBool == true){
+    finalScreen()
+  }
 
 }
 
@@ -95,13 +144,19 @@ class movieData{
       this.button.position(230, i*25+330);
     }
     this.button.style('z-index', '1');
+    this.button.hide()
   }
 
-
   show(){
+    this.button.show()
     //when the button is pressed trigger the update function
     //to update the data entry
     this.button.mousePressed(() => this.update())
+    image(secondScreen,  windowWidth/2, windowHeight/2, 1100, 700)
+  }
+
+  hideButtons(){
+     this.button.hide()
   }
 
   // update the output for each entry after the button is clicked
@@ -150,30 +205,13 @@ class movieData{
     for(let i = 0; i < suggestedMovieArray.length; i++){
       text(suggestedMovieArray[i], windowWidth/2 +203, windowHeight/2 +135 + (i*25+55))
     }
-    } 
+    } else{
+      
+    }
   }
 }
 
-
-function draw(){
- 
-  print("X" + (windowWidth/2 - mouseX) * -1 , 30, 30)
-  print("y" + (windowHeight/2 - mouseY) *-1, 30, 60)
-  // if (firstScreen == true){
-  //   image(firstScreen,  windowWidth/2, windowHeight/2, 1100, 700)
-  // }else{
-  //   image(secondScreen,  windowWidth/2, windowHeight/2, 1100, 700)
-  // }
-
-  // }
-    // for (let i = 0; i < movieDataArray.length; i++){
-    // movieDataArray[i].update();
-    // }
-}
-
-
-
-
+//where do i input the code: if choiceCounter
 //recommendation algorithms
 //change my screen to rectangles and shapes not images
 //need to integrate my firstScreen
