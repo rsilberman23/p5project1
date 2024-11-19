@@ -10,27 +10,21 @@ let movieDataArray = [];
 let secondScreenBool =false;
 let firstScreenBool = true;
 let thirdScreenBool =false;
+let movieClipImage;
 let camImage;
-let warningImage;
 
 let choiceCounter = 0
 let userGenreArray = []
 let userGenre2Array = []
 let suggestedMovieArray = []
-let userGenre3Array = []
-let castMember1Array = []
-let castMember2Array = []
-let streamingService1Array = []
-let streamingService2Array = []
-let franchiseArray = []
 
 function preload() {
  table = loadTable('js/DataWithImages.csv', 'csv', 'header', loadImageArray)
  secondScreen = loadImage('images/secondScreen.png')
  firstScreen = loadImage('images/firstScreen.png')
- thirdScreen = loadImage('images/backgroundColor.png')
+ thirdScreen = loadImage('images/thirdScreen.png')
+ movieClipImage = loadImage('images/movieClip.png')
  camImage = loadImage('images/cam.png')
- warningImage = loadImage('images/warning.png')
 }
 
 function loadImageArray(){
@@ -59,6 +53,7 @@ function setup() {
   toThirdScreenButton.style("z-index", "1");
   toThirdScreenButton.mousePressed(finalScreen)
   toThirdScreenButton.hide()
+
 
   //button
   for (let i = 0; i < table.getRowCount(); i++){
@@ -91,68 +86,70 @@ function setup() {
 function introScreen(){
 
 image(firstScreen, windowWidth/2, windowHeight/2)
+background(255, 124, 117);
+//NEED THE TEXT TO BE ON TOP OF THE RECTANGLES
+text("Curate Your Film Profile", 90, 120, 1270, 170);
+rect(90,120,1270,170);
+text("Choose 5 films from my favorite and your profile will be displayed", 200, 300, 1030, 170);
+rect(200, 300, 1030, 170);
+
 }
 
 function chooseMovies(){
   background(255, 124, 117);
   firstScreenBool = false
-  secondScreenBool = true
+  //secondScreenBool = true
   startButton.hide()
 
   for (let i = 0; i < movieDataArray.length; i++){
     movieDataArray[i].show();
   }
-  //print(userGenreArray.length)
-  // if(userGenreArray.length == 5){
-    
-  // }
+
+  text("Films to Select From",40,165,30,30);
+  rect(220,210,315,500);
+  rect(565,210,315,500);
+  text("Genres You Like",40,165,30,30);
+  rect(910,210,315,250);
+  text("Suggested Films For You",40,165,30,30);
+  rect(910,480,315,235);
+  image(movieClipImage, 30,50)
 }
 
 function finalScreen(){
   toThirdScreenButton.hide();
-  thirdScreenBool = true;
+  //thirdScreenBool = true;
   for (let i = 0; i < movieDataArray.length; i++){
     movieDataArray[i].hideButtons();
   }
-  image(warningImage, 800, 560, 100, 100) //HOW DO I BRING THIS TO THE FRONT OF THE RECTANGLE????
-  background(255, 124, 117);
-  image(camImage, 325, 563, 500, 350)
-  fill(255, 211, 89)
-  rect(550,50,800,675);
-  fill(0, 0, 0)
-  strokeWeight(6)
-  textSize(38)
-  // textAlign(CENTER)
-  text("Your Film Profile",580,110);
-  fill(0, 0, 0);
-  textSize(24)
-  strokeWeight(2)
-  text('You tend to like this genre: ' + userGenreArray[0], 580, 180);
-  text('And you also like this genre: ' + userGenre2Array[0], 580, 220);
-  text('You might even like this genre: ' + userGenre3Array[0], 580, 260);
-  text('This is a celebrity who captivates you: ' + castMember1Array[0], 580, 300);
-  text('So is this: ' + castMember2Array[0], 580, 340);
-  text('You tend to use this platform: ' + streamingService1Array[0], 580, 380);
-  text('And this platform: ' + streamingService2Array[0], 580, 420);
-  if (franchiseArray[0] == "Yes"){
-    text('You are a fan of franchises.', 580, 460);
+  text("Your Film Profile",400,165,30,30);
+  rect(220,210,315,500);
+  text('You tend to like this genre: ' + genre1Array[0], windowWidth/2, 200);//genre1Array[0]
+  text('And you also like this genre: ' + this.genre2, windowWidth/2, 250);
+  text('You might even like this genre: ' + this.genre3, windowWidth/2, 300);
+  //text('Rotten Tomatoes: ' + this.tomatoes, windowWidth/2 -141, windowHeight/2 + 270);
+  text('This is a celebrity who captivates you: ' + this.castMember1, windowWidth/2, 400);
+  text('So is this: ' + this.castMember2, windowWidth/2, 450);
+  //text('Cast Member 3: ' + this.castMember3, windowWidth/2, 500);
+  text('You tend to use this platform: ' + this.streamingService1, windowWidth/2, 550);
+  text('And this platform: ' + this.streamingService2, windowWidth/2, 600);
+  if (this.franchise == "Yes"){
+    text('You are a fan of franchises.' + this.franchise, windowWidth/2, 650);
   } else{
-    text('You are not a huge fan of franchises.', 580, 460);
+    text('You are not a huge fan of franchises.' + this.franchise, windowWidth/2, 650);
   }
-  text('You will like this movie: ' + suggestedMovieArray[0], 580, 500);
-  fill(240, 10, 10)
-  textSize(12)
-  text("By picking your favorite films, you've shared more than just preferences—your choices reveal a lot about you. Remember, every click ", 580, 640);
-  text("generates data, and that data, despite being accurate or not, can be used in ways you might not expect.", 580, 660);
-  text("Stay mindful of what you share. Your privacy matters.", 580, 680);
-  //background(255, 124, 117);
+  text('You will like this movie: ' + this.suggestedMovie, windowWidth/2, 700);
+
+  text("By picking your favorite films, you've shared more than just preferences—your choices reveal a lot about you. Remember, every click generates data, and that data, despite being accurate or not, can be used in ways you might not expect. Stay mindful of what you share. Your privacy matters.",400,165,30,30);
+  background(255, 124, 117);
+
+  //image(thirdScreen, windowWidth/2, windowHeight/2)
 }
 
 
 function draw(){
- 
-  // print("X" + (windowWidth/2 - mouseX) * -1 , 30, 30)
-  // print("y" + (windowHeight/2 - mouseY) *-1, 30, 60)
+ fill(0, 0, 0)
+  text("X" + mouseX, windowWidth, windowHeight)
+  text("y" + mouseY, windowWidth, windowHeight)
 
   if(firstScreenBool == true){
     introScreen()
@@ -167,7 +164,6 @@ function draw(){
   }
 
 }
-
 
 //movie data class
 class movieData{
@@ -214,23 +210,17 @@ class movieData{
   // update the output for each entry after the button is clicked
   update(){
     choiceCounter ++
-    if(choiceCounter == 5){
+    if(choiceCounter <= 5){
       toThirdScreenButton.show();
     }
-    if(choiceCounter <= 5){
-
-    userGenreArray.push(this.genre1)
+    if(choiceCounter<=5){
+      userGenreArray.push(this.genre1)
     userGenre2Array.push(this.genre2)
     suggestedMovieArray.push(this.suggestedMovie)
-    userGenre3Array.push(this.genre3)
-    castMember1Array.push(this.castMember1)
-    castMember2Array.push(this.castMember2)
-    streamingService1Array.push(this.streamingService1)
-    streamingService2Array.push(this.streamingService2)
-    franchiseArray.push(this.franchise)
-
+    //push cast members 
 
     background(255, 124, 117);
+      //update the variables to reflect the data tied to the button that was clicked
     image(secondScreen,  windowWidth/2, windowHeight/2, 1100, 700)
     
     fill(0, 0, 0);
@@ -241,8 +231,21 @@ class movieData{
     text('Title: ' + this.title, windowWidth/2 -141, windowHeight/2 +180 );
     text('Director: ' + this.director, windowWidth/2 -141, windowHeight/2 +210)
     text('Date: ' + this.date, windowWidth/2 -141, windowHeight/2 + 240);
+    //text('Genre 1: ' + this.genre1, windowWidth/2, 200);
+    //text('Genre 2: ' + this.genre2, windowWidth/2, 250);
+    //text('Genre 3: ' + this.genre3, windowWidth/2, 300);
     text('Rotten Tomatoes: ' + this.tomatoes, windowWidth/2 -141, windowHeight/2 + 270);
+    //text('Cast Member 1: ' + this.castMember1, windowWidth/2, 400);
+    //text('Cast Member 2: ' + this.castMember2, windowWidth/2, 450);
+    //text('Cast Member 3: ' + this.castMember3, windowWidth/2, 500);
+    //text('Streaming Service 1: ' + this.streamingService1, windowWidth/2, 550);
+    //text('Streaming Service 2: ' + this.streamingService2, windowWidth/2, 600);
+    //text('Franchise? ' + this.franchise, windowWidth/2, 650);
+    //text('Suggested Movie: ' + this.suggestedMovie, windowWidth/2, 700);
     image(this.moviePoster, windowWidth/2, windowHeight/2, 200, 300)
+    // }else if (!this.checkbox.checked()){
+    //  // image(secondScreen, 0, 0, windowWidth, windowHeight)
+    // }
     this.button.hide()
     for(let i = 0; i < userGenreArray.length; i++){
       text(userGenreArray[i], windowWidth/2 +195, windowHeight/2 -140 + (i*25+55))
@@ -253,18 +256,16 @@ class movieData{
     for(let i = 0; i < suggestedMovieArray.length; i++){
       text(suggestedMovieArray[i], windowWidth/2 +203, windowHeight/2 +135 + (i*25+55))
     }
-    } 
+    } else{
+      
+    }
   }
 }
 
-//I want to change the background images to rectangles. 
-//What do you think is the best way to go about it, so it does not break my code?
-//In line 117, I have a line of code to show an image, but the image appears behind the rectangle...
-//How do I bring this image to the front (or in front of the rectangle)?
+//i want the data to be collected from the first movie clicked... i think... to be shown on third screen
 
 
 
-
-
-
-
+//if genre comes up more than once, blurb will appear on thirdScreen
+//   about the type of person you are...
+//create button to get back to firstScreen
