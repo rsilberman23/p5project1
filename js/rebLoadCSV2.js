@@ -23,11 +23,12 @@ let castMember2Array = []
 let streamingService1Array = []
 let streamingService2Array = []
 let franchiseArray = []
+let titleArray = []
 
 function preload() {
  table = loadTable('js/DataWithImages.csv', 'csv', 'header', loadImageArray)
  secondScreen = loadImage('images/secondScreen.png')
- firstScreen = loadImage('images/firstScreen.png')
+ firstScreen = loadImage('images/backgroundColor.png')
  thirdScreen = loadImage('images/backgroundColor.png')
  camImage = loadImage('images/cam.png')
  warningImage = loadImage('images/warning.png')
@@ -49,7 +50,7 @@ function setup() {
 
   startButton = createButton("Begin")
   startButton.mousePressed(chooseMovies)
-  startButton.position(windowWidth/2, windowHeight/2 + 200)
+  startButton.position(windowWidth/2 - startButton.width / 2, windowHeight/2 + 200 - startButton.height /2)
   startButton.style("z-index", "1")
 
   //create button in setup otherwise you'll be creating a bunch
@@ -96,10 +97,27 @@ function setup() {
 
 function introScreen(){
 
-image(firstScreen, windowWidth/2, windowHeight/2)
+//image(firstScreen, windowWidth/2, windowHeight/2)
+fill(252, 252, 252)
+rect(windowWidth/2 - 635, windowHeight/2 - 270, 1270, 170);
+strokeWeight(6)
+textSize(70)
+fill(0, 0, 0)
+textAlign(CENTER)
+//text("Curate Your Film Profile", windowWidth/2 - 300, windowHeight/2 - 165);
+text("Curate Your Film Profile", windowWidth/2, windowHeight/2 - 165);
+
+fill(252, 252, 252)
+rect(windowWidth/2 - 635, windowHeight/2 - 85, 1270, 170);
+
+strokeWeight(6)
+textSize(38)
+fill(0, 0, 0)
+text("Choose 5 films from my favorites and your profile will be displayed", windowWidth/2, windowHeight/2 + 10)
 }
 
 function chooseMovies(){
+  //secondScreenBool = true;
   background(255, 124, 117);
   firstScreenBool = false
   secondScreenBool = true
@@ -108,15 +126,37 @@ function chooseMovies(){
   for (let i = 0; i < movieDataArray.length; i++){
     movieDataArray[i].show();
   }
-  //print(userGenreArray.length)
-  // if(userGenreArray.length == 5){
-    
-  // }
+  fill(252, 252, 252)
+  rect(windowWidth/2 - 500, windowHeight/2 - 180, 310, 510);
+  strokeWeight(4)
+  textSize(30)
+  fill(0, 0, 0)
+  //textAlign(left)
+  text("Films to Select From", windowWidth/2 - 545, windowHeight/2 - 165, 400, 400);
+  
+  //poster box
+  fill(252, 252, 252)
+  rect(windowWidth/2 - 155, windowHeight/2 - 180, 310, 510);
+  strokeWeight(4)
+
+  //genres you like box
+  fill(252, 252, 252)
+  rect(windowWidth/2 + 190, windowHeight/2 - 180, 310, 250);
+  fill(0,0,0)
+  text("Films You Chose", windowWidth/2 + 145, windowHeight/2 - 165, 400, 400);
+
+  //Suggested Films for you
+  fill(252, 252, 252)
+  rect(windowWidth/2 + 190, windowHeight/2 + 90, 310, 240);
+  fill(0,0,0)
+  text("Suggested Films", windowWidth/2 + 145, windowHeight/2 + 105, 400, 400);
+
 }
 
 function finalScreen(){
   toThirdScreenButton.hide();
   thirdScreenBool = true;
+  // firstScreenBool = true;
   for (let i = 0; i < movieDataArray.length; i++){
     movieDataArray[i].hideButtons();
   }
@@ -151,6 +191,7 @@ function finalScreen(){
   text("By picking your favorite films, you've shared more than just preferences—your choices reveal a lot about you. Remember, every click ", windowWidth / 2 - 50, windowHeight/2 + 230);
   text("generates data, and that data, despite being accurate or not, can be used in ways you might not expect.", windowWidth / 2 - 50, windowHeight/2 + 250); 
   text("Stay mindful of what you share. Your privacy matters.", windowWidth / 2 - 50, windowHeight/2 + 270);
+  restartButton.show();
 }
 
 
@@ -164,7 +205,7 @@ function draw(){
   }
 
   if(secondScreenBool == true){
-   // chooseMovies()
+   //chooseMovies()
   }
 
   if(thirdScreenBool == true){
@@ -198,7 +239,7 @@ class movieData{
 
     //position each button 50 pixels below the previous
     for(let i = -1; i < movieDataArray.length; i++){
-      this.button.position(230, i*25+330);
+      this.button.position(windowWidth/2 - 490, i*25+ windowHeight/2 - 90); 
     }
     this.button.style('z-index', '1');
     this.button.hide()
@@ -233,6 +274,7 @@ class movieData{
     streamingService1Array.push(this.streamingService1)
     streamingService2Array.push(this.streamingService2)
     franchiseArray.push(this.franchise)
+    titleArray.push(this.title)
 
 
     background(255, 124, 117);
@@ -249,18 +291,18 @@ class movieData{
     text('Rotten Tomatoes: ' + this.tomatoes, windowWidth/2 -141, windowHeight/2 + 270);
     image(this.moviePoster, windowWidth/2, windowHeight/2, 200, 300)
     this.button.hide()
-    for(let i = 0; i < userGenreArray.length; i++){
-      text(userGenreArray[i], windowWidth/2 +195, windowHeight/2 -140 + (i*25+55))
+    for(let i = 0; i < titleArray.length; i++){
+      text(titleArray[i], windowWidth/2 + 205, windowHeight/2 -140 + (i*25+55))
     }
-    for(let i = 0; i < userGenre2Array.length; i++){
-      text(userGenre2Array[i], windowWidth/2 +350, windowHeight/2 -140 + (i*25+55))
+    //for(let i = 0; i < userGenre2Array.length; i++){
+    //  text(userGenre2Array[i], windowWidth/2 +350, windowHeight/2 -140 + (i*25+55))
     }
     for(let i = 0; i < suggestedMovieArray.length; i++){
       text(suggestedMovieArray[i], windowWidth/2 +203, windowHeight/2 +135 + (i*25+55))
     }
     } 
   }
-}
+//}
 
 //I want to change the background images to rectangles. 
 //What do you think is the best way to go about it, so it does not break my code?
@@ -268,7 +310,10 @@ class movieData{
 //How do I bring this image to the front (or in front of the rectangle)?
 
 
-
+//I added rectangles and text to the first and second screens.
+//when i click on a movie title, my rectangles and text go away. 
+//when i get rid of the backgrounds, my code does not work properly.
+//my restart button does not bring you to the first screen (I attempted to code it in setup)
 
 
 
