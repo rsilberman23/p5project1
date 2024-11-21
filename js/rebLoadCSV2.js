@@ -62,7 +62,7 @@ function setup() {
   toThirdScreenButton.hide()
 
   restartButton = createButton("Restart");
-  restartButton.position(windowWidth/2 + 565, windowHeight/2 +109)
+  restartButton.position(windowWidth/2 - 600, windowHeight/2 - 300)
   restartButton.style("z-index", "1");
   restartButton.mousePressed(firstScreen)
   restartButton.hide()
