@@ -64,7 +64,7 @@ function setup() {
   restartButton = createButton("Restart");
   restartButton.position(windowWidth/2 - 600, windowHeight/2 - 300)
   restartButton.style("z-index", "1");
-  restartButton.mousePressed(firstScreen)
+  restartButton.mousePressed(resetGame)
   restartButton.hide()
 
   //button
@@ -192,6 +192,43 @@ function finalScreen(){
   text("generates data, and that data, despite being accurate or not, can be used in ways you might not expect.", windowWidth / 2 - 50, windowHeight/2 + 250); 
   text("Stay mindful of what you share. Your privacy matters.", windowWidth / 2 - 50, windowHeight/2 + 270);
   restartButton.show();
+}
+
+function resetGame(){
+  firstScreenBool = true;
+  secondScreenBool = false;
+  thirdScreenBool = false;
+
+  choiceCounter = 0;
+  userGenreArray = [];
+  userGenre2Array = [];
+  userGenre3Array = [];
+  suggestedMovieArray = [];
+  castMember1Array = [];
+  castMember2Array = [];
+  streamingService1Array = [];
+  streamingService2Array = [];
+  franchiseArray = [];
+  titleArray = [];
+
+  background(255, 124, 117)
+  fill(255)
+  
+
+  startButton.show()
+  restartButton.hide()
+
+  toThirdScreenButton.hide()
+
+  for (let i=0; i < movieDataArray.length; i++){
+    movieDataArray[i].hideButtons();
+  }
+
+  imageMode(CENTER)
+  fill(255, 124, 117)
+  background(255, 124, 117)
+
+  clear()
 }
 
 
