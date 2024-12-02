@@ -64,7 +64,7 @@ function setup() {
   restartButton = createButton("Restart");
   restartButton.position(windowWidth/2 - 600, windowHeight/2 - 300)
   restartButton.style("z-index", "1");
-  restartButton.mousePressed(resetGame)
+  restartButton.mousePressed(introScreen)
   restartButton.hide()
 
   //button
@@ -96,11 +96,31 @@ function setup() {
 
 
 function introScreen(){
+  startButton.show();
+  restartButton.hide();
+   firstScreenBool = true;
+  secondScreenBool = false;
+  thirdScreenBool = false;
+ choiceCounter = 0;
+  userGenreArray = [];
+  userGenre2Array = [];
+  userGenre3Array = [];
+  suggestedMovieArray = [];
+  castMember1Array = [];
+  castMember2Array = [];
+  streamingService1Array = [];
+  streamingService2Array = [];
+  franchiseArray = [];
+  titleArray = [];
 
+  background(255, 124, 117);
 //image(firstScreen, windowWidth/2, windowHeight/2)
 fill(252, 252, 252)
-rect(windowWidth/2 - 635, windowHeight/2 - 270, 1270, 170);
+stroke(0)
 strokeWeight(6)
+rect(windowWidth/2 - 635, windowHeight/2 - 270, 1270, 170);
+//stroke(0)
+strokeWeight(1)
 textSize(70)
 fill(0, 0, 0)
 textAlign(CENTER)
@@ -108,12 +128,15 @@ textAlign(CENTER)
 text("Curate Your Film Profile", windowWidth/2, windowHeight/2 - 165);
 
 fill(252, 252, 252)
+//stroke(0)
+strokeWeight(6)
 rect(windowWidth/2 - 635, windowHeight/2 - 85, 1270, 170);
 
-strokeWeight(6)
+strokeWeight(1)
 textSize(38)
 fill(0, 0, 0)
 text("Choose 5 films from my favorites and your profile will be displayed", windowWidth/2, windowHeight/2 + 10)
+//print("intro")
 }
 
 function chooseMovies(){
@@ -127,28 +150,35 @@ function chooseMovies(){
     movieDataArray[i].show();
   }
   fill(252, 252, 252)
+strokeWeight(4)
   rect(windowWidth/2 - 500, windowHeight/2 - 180, 310, 510);
-  strokeWeight(4)
+  strokeWeight(1)
   textSize(30)
   fill(0, 0, 0)
   //textAlign(left)
+   strokeWeight(1)
   text("Films to Select From", windowWidth/2 - 545, windowHeight/2 - 165, 400, 400);
   
   //poster box
+  strokeWeight(4)
   fill(252, 252, 252)
   rect(windowWidth/2 - 155, windowHeight/2 - 180, 310, 510);
-  strokeWeight(4)
+  
 
   //genres you like box
   fill(252, 252, 252)
+  strokeWeight(4)
   rect(windowWidth/2 + 190, windowHeight/2 - 180, 310, 250);
   fill(0,0,0)
+  strokeWeight(1)
   text("Films You Chose", windowWidth/2 + 145, windowHeight/2 - 165, 400, 400);
 
   //Suggested Films for you
   fill(252, 252, 252)
+  strokeWeight(4)
   rect(windowWidth/2 + 190, windowHeight/2 + 90, 310, 240);
   fill(0,0,0)
+  strokeWeight(1)
   text("Suggested Films", windowWidth/2 + 145, windowHeight/2 + 105, 400, 400);
 
 }
@@ -169,7 +199,7 @@ function finalScreen(){
   textSize(38)
   // textAlign(CENTER)
   text("Your Film Profile", windowWidth/2 - 50,windowHeight/2 - 250);
-  fill(0, 0, 0);
+  fill(0, 0, 0, 255);
   textSize(24)
   strokeWeight(2)
   text('You tend to like this genre: ' + userGenreArray[0], windowWidth/2 - 50, windowHeight/2 - 200);
@@ -213,7 +243,7 @@ function resetGame(){
 
   background(255, 124, 117)
   fill(255)
-  
+
 
   startButton.show()
   restartButton.hide()
@@ -229,6 +259,8 @@ function resetGame(){
   background(255, 124, 117)
 
   clear()
+
+  print(userGenreArray)
 }
 
 
@@ -314,14 +346,50 @@ class movieData{
     titleArray.push(this.title)
 
 
-    background(255, 124, 117);
-    image(secondScreen,  windowWidth/2, windowHeight/2, 1100, 700)
+    // background(255, 124, 117);
+     //image(secondScreen,  windowWidth/2, windowHeight/2, 1100, 700)
     
-    fill(0, 0, 0);
+    // fill(0, 0, 0);
+    // noStroke();
+    // textSize(21);
+     textAlign(CENTER);
+     stroke(0)
+    fill(252, 252, 252)
+   strokeWeight(4)
+  rect(windowWidth/2 - 500, windowHeight/2 - 180, 310, 510);
+  strokeWeight(1)
+  textSize(30)
+  fill(0, 0, 0)
+  //textAlign(left)
+   strokeWeight(1)
+  text("Films to Select From", windowWidth/2 - 545, windowHeight/2 - 165, 400, 400);
+  
+  //poster box
+  strokeWeight(4)
+  fill(252, 252, 252)
+  rect(windowWidth/2 - 155, windowHeight/2 - 180, 310, 510);
+  
+
+  //genres you like box
+  fill(252, 252, 252)
+  strokeWeight(4)
+  rect(windowWidth/2 + 190, windowHeight/2 - 180, 310, 250);
+  fill(0,0,0)
+  strokeWeight(1)
+  text("Films You Chose", windowWidth/2 + 145, windowHeight/2 - 165, 400, 400);
+
+  //Suggested Films for you
+  fill(252, 252, 252)
+  strokeWeight(4)
+  rect(windowWidth/2 + 190, windowHeight/2 + 90, 310, 240);
+  fill(0,0,0)
+  strokeWeight(1)
+  text("Suggested Films", windowWidth/2 + 145, windowHeight/2 + 105, 400, 400);
+
+  fill(0, 0, 0);
     noStroke();
     textSize(21);
     textAlign(LEFT);
-
     text('Title: ' + this.title, windowWidth/2 -141, windowHeight/2 +180 );
     text('Director: ' + this.director, windowWidth/2 -141, windowHeight/2 +210)
     text('Date: ' + this.date, windowWidth/2 -141, windowHeight/2 + 240);
