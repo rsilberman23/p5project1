@@ -10,8 +10,19 @@ let movieDataArray = [];
 let secondScreenBool =false;
 let firstScreenBool = true;
 let thirdScreenBool =false;
-let camImage;
+// let camImage;
+let cookiesImage;
 let warningImage;
+let scienceAdImage;
+let actionAdImage;
+let dramaAdImage;
+let paramountAdImage;
+let maxAdImage;
+let disneyAdImage;
+let appleAdImage;
+let peacockAdImage;
+let netflixAdImage;
+let primeAdImage;
 
 let choiceCounter = 0
 let userGenreArray = []
@@ -30,8 +41,19 @@ function preload() {
  secondScreen = loadImage('images/secondScreen.png')
  firstScreen = loadImage('images/backgroundColor.png')
  thirdScreen = loadImage('images/backgroundColor.png')
- camImage = loadImage('images/cam.png')
+ // camImage = loadImage('images/cam.png')
  warningImage = loadImage('images/warning.png')
+ scienceAdImage = loadImage('images/scienceAd.png')
+ actionAdImage = loadImage('images/actionAd.png')
+ dramaAdImage = loadImage('images/dramaAd.png')
+ paramountAdImage = loadImage('images/paramountAd.png')
+ maxAdImage = loadImage('images/maxAd.png')
+ disneyAdImage = loadImage('images/disneyAd.png')
+ appleAdImage = loadImage('images/appleAd.png')
+ peacockAdImage = loadImage('images/peacockAd.png')
+ netflixAdImage = loadImage('images/netflixAd.png')
+ primeAdImage = loadImage('images/primeAd.png')
+ cookiesImage = loadImage('images/cookies.png')
 }
 
 function loadImageArray(){
@@ -48,22 +70,30 @@ function setup() {
   background(255, 124, 117);
   fill(255)
 
-  startButton = createButton("Begin")
+  startButton = createButton("Accept Cookies and Begin")
   startButton.mousePressed(chooseMovies)
-  startButton.position(windowWidth/2 - startButton.width / 2, windowHeight/2 + 200 - startButton.height /2)
+  startButton.position(windowWidth/2 - 120, windowHeight/2 + 280)
+  // startButton.position(windowWidth/2 - startButton.width/2, windowHeight/2 + 200 - startButton.height /2)
   startButton.style("z-index", "1")
+  startButton.style('background-color', 'white')
+  startButton.style('padding', '12px 24px')
+  startButton.style('border', '2px solid black')
 
   //create button in setup otherwise you'll be creating a bunch
   //buttons in the draw loop
-  toThirdScreenButton = createButton("I'm done choosing my favorite films")
-  toThirdScreenButton.position(windowWidth/2 + 565, windowHeight/2 +109)
+  toThirdScreenButton = createButton("Continue")
+  toThirdScreenButton.position(windowWidth/2 + 600, windowHeight/2 + 300)
   toThirdScreenButton.style("z-index", "1");
+  toThirdScreenButton.style('background-color', 'white')
+  toThirdScreenButton.style('border', '2px solid black')
   toThirdScreenButton.mousePressed(finalScreen)
   toThirdScreenButton.hide()
 
   restartButton = createButton("Restart");
-  restartButton.position(windowWidth/2 - 600, windowHeight/2 - 300)
+  restartButton.position(windowWidth/2 + 600, windowHeight/2 + 300)
   restartButton.style("z-index", "1");
+  restartButton.style('background-color', 'white')
+  restartButton.style('border', '2px solid black')
   restartButton.mousePressed(introScreen)
   restartButton.hide()
 
@@ -137,6 +167,9 @@ textSize(38)
 fill(0, 0, 0)
 text("Choose 5 films from my favorites and your profile will be displayed", windowWidth/2, windowHeight/2 + 10)
 //print("intro")
+
+image(cookiesImage, windowWidth/2, windowHeight/2 + 180, 200, 170)
+
 }
 
 function chooseMovies(){
@@ -156,7 +189,7 @@ strokeWeight(4)
   textSize(30)
   fill(0, 0, 0)
   //textAlign(left)
-   strokeWeight(1)
+  strokeWeight(1)
   text("Films to Select From", windowWidth/2 - 545, windowHeight/2 - 165, 400, 400);
   
   //poster box
@@ -180,7 +213,8 @@ strokeWeight(4)
   fill(0,0,0)
   strokeWeight(1)
   text("Suggested Films", windowWidth/2 + 145, windowHeight/2 + 105, 400, 400);
-
+  textSize(12)
+  text("Cookies being collected...", windowWidth/2 - 545, windowHeight/2 + 300, 400, 400);
 }
 
 function finalScreen(){
@@ -191,7 +225,7 @@ function finalScreen(){
     movieDataArray[i].hideButtons();
   }
   background(255, 124, 117);
-  image(camImage, windowWidth/2 - 330, windowHeight/2 + 188, 500, 350)
+  // image(camImage, windowWidth/2 - 330, windowHeight/2 + 188, 500, 350)
   fill(255, 211, 89)
   rect(windowWidth/2 - 100, windowHeight/2 - 325,800,675);
   fill(0, 0, 0)
@@ -202,6 +236,7 @@ function finalScreen(){
   fill(0, 0, 0, 255);
   textSize(24)
   strokeWeight(2)
+  textStyle(NORMAL)
   text('You tend to like this genre: ' + userGenreArray[0], windowWidth/2 - 50, windowHeight/2 - 200);
   text('And you also like this genre: ' + userGenre2Array[0], windowWidth/2 - 50, windowHeight/2 - 165);
   text('You might even like this genre: ' + userGenre3Array[0], windowWidth/2 - 50, windowHeight/2 - 130);
@@ -218,10 +253,39 @@ function finalScreen(){
   image(warningImage, windowWidth/2 + 300, windowHeight/2 + 150, 100, 100)
   fill(240, 10, 10)
   textSize(12)
-  text("By picking your favorite films, you've shared more than just preferences—your choices reveal a lot about you. Remember, every click ", windowWidth / 2 - 50, windowHeight/2 + 230);
-  text("generates data, and that data, despite being accurate or not, can be used in ways you might not expect.", windowWidth / 2 - 50, windowHeight/2 + 250); 
-  text("Stay mindful of what you share. Your privacy matters.", windowWidth / 2 - 50, windowHeight/2 + 270);
+  text("By continuing to use this app, you acknowledge that I am collecting data based on the movies you select and your viewing preferences.",  windowWidth / 2 - 50, windowHeight/2 + 230);
+  text("This information will be used to tailor ads specifically for you--ads that follow you across platforms.", windowWidth / 2 - 50, windowHeight/2 + 250); 
+  text("Once you accepted the cookies, you allowed me to track your activity, be prepared:", windowWidth / 2 - 50, windowHeight/2 + 270);
+  textStyle(BOLD)
+  text("the ads will know you--perhaps more than you'd like them to.", windowWidth / 2 - 50, windowHeight/2 + 290);
   restartButton.show();
+
+  //genre ad image
+  if (userGenreArray[0] == "Science Fiction"){
+    image(scienceAdImage, windowWidth/2 - 400, windowHeight/2 - 150, 500, 250)
+  } else if (userGenreArray[0] == "Action"){
+    image(actionAdImage, windowWidth/2 - 400, windowHeight/2 - 150, 500, 250)
+  } else if (userGenreArray[0] == "Drama"){
+      image(dramaAdImage, windowWidth/2 - 400, windowHeight/2 - 180, 350, 350)
+  }
+
+  // streaming service ad image
+  if (streamingService1Array[0] == "Paramount+"){
+    image(paramountAdImage, windowWidth/2 - 400, windowHeight/2 + 150, 500, 250)
+  } else if (streamingService1Array[0] == "Disney+"){
+    image(disneyAdImage, windowWidth/2 - 400, windowHeight/2 + 150, 500, 250)
+  } else if (streamingService1Array[0] == "Max"){
+    image(maxAdImage, windowWidth/2 - 400, windowHeight/2  + 150, 400, 250)
+  } else if (streamingService1Array[0] == "Apple TV"){
+    image(appleAdImage, windowWidth/2 - 400, windowHeight/2  + 150, 500, 200)
+  } else if (streamingService1Array[0] == "Peacock"){
+    image(peacockAdImage, windowWidth/2 - 400, windowHeight/2  + 170, 400, 350)
+  } else if (streamingService1Array[0] == "Prime Video"){
+    image(primeAdImage, windowWidth/2 - 400, windowHeight/2  + 170, 200, 300)
+  } else if (streamingService1Array[0] == "Netflix"){
+    image(netflixAdImage, windowWidth/2 - 400, windowHeight/2  + 150, 500, 250)
+  }
+
 }
 
 function resetGame(){
@@ -385,6 +449,8 @@ class movieData{
   fill(0,0,0)
   strokeWeight(1)
   text("Suggested Films", windowWidth/2 + 145, windowHeight/2 + 105, 400, 400);
+  textSize(12)
+  text("Cookies being collected...", windowWidth/2 - 545, windowHeight/2 + 300, 400, 400);
 
   fill(0, 0, 0);
     noStroke();
